@@ -50,7 +50,7 @@
 						<td>
 							<div class="form-group">
 								<input type="text" class="form-control"
-								placeholder="yyyy/MM/dd" th:fiels="*{birthday}"/>
+								placeholder="yyyy/MM/dd" th:field="*{birthday}"/>
 							</div>
 						</td>
 					</tr>
@@ -84,7 +84,7 @@
 				<ul>
 					<li th:each="error:${#fields.detailedErrors()}">
 						<span th:text="${error.message}">Errormessage</span>
-					<li>
+					</li>
 				</ul>
 				<!-- ユーザー登録ボタン -->
 				<button class="btn btn-primary" type="submit">

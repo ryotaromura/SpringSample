@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.login.domain.model.User;
 import com.example.demo.login.domain.repository.UserDao;
 
-@Repository
+@Repository("UserDaoJdbcImpl")
 public class UserDaoJdbcImpl implements UserDao {
 
 	@Autowired
@@ -115,18 +115,47 @@ public class UserDaoJdbcImpl implements UserDao {
 	// Userテーブルを１件更新
 	@Override
 	public int updateOne(User user) throws DataAccessException {
-		return 0;
+
+		// 一件更新
+		int rowNumber = jdbc.update("UPDATE M_USER"
+			+" SET"
+			+" password = ?,"
+			+" user_name = ?,"
+			+" birthday = ?,"
+			+" age = ?,"
+			+" marriage = ?"
+			+" WHERE user_id = ?"
+			, user.getPassword()
+			, user.getUserName()
+			, user.getBirthday()
+			, user.getAge()
+			, user.isMarriage()
+			, user.getUserId());
+
+		return rowNumber;
 	}
 
 	// Userテーブルを１件削除
 	@Override
 	public int deleteOne(String userId) throws DataAccessException {
-		return 0;
+
+		// １件削除
+		int rowNumber = jdbc.update("DELETE FROM m_user WHERE user_id = ?",
+			userId);
+		return rowNumber;
 	}
 
 	// Userテーブルの全データをCSVに出力する
 	@Override
 	public void userCsvOut() throws DataAccessException {
 
+		// M_USERテーブルのデータを全件取得するSQL
+		String sql = "SELECT * FROM m_user";
+
+		// ResultSetExtractionの生成
+		UserRowCallbackHandler handler = new UserRowCallbackHandler();
+
+		// SQL実行＆CSV出力
+		jdbc.query(sql, handler);
 	}
 }

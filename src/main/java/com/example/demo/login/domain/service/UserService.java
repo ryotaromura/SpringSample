@@ -11,16 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.login.domain.model.User;
 import com.example.demo.login.domain.repository.UserDao;
 
+// @Transactional
+@Transactional
 @Service
 public class UserService {
 
 	// @Qualifier
 	@Autowired
-	@Qualifier("UserDaoNamedJdbcImpl")
+	@Qualifier("UserDaoJdbcImpl")
 	UserDao dao;
 
 	// insert用メソッド

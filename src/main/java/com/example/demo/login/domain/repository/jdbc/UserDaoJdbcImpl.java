@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.login.domain.model.User;
@@ -18,6 +19,9 @@ public class UserDaoJdbcImpl implements UserDao {
 
 	@Autowired
 	JdbcTemplate jdbc;
+
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	// Userテーブルの件数を取得
 	@Override
@@ -33,6 +37,9 @@ public class UserDaoJdbcImpl implements UserDao {
 	@Override
 	public int insertOne(User user) throws DataAccessException {
 
+		// パスワード暗号化
+		String password = passwordEncoder.encode(user.getPassword());
+
 		// insert
 		// １件登録
 		int rowNumber = jdbc.update("INSERT INTO m_user(user_id,"
@@ -44,7 +51,7 @@ public class UserDaoJdbcImpl implements UserDao {
 		+ "role)"
 		+ "VALUES(?,?,?,?,?,?,?)"
 		,user.getUserId()
-		,user.getPassword()
+		,password
 		,user.getUserName()
 		,user.getBirthday()
 		,user.getAge()
@@ -116,6 +123,9 @@ public class UserDaoJdbcImpl implements UserDao {
 	@Override
 	public int updateOne(User user) throws DataAccessException {
 
+		// パスワード暗号化
+		String password = passwordEncoder.encode(user.getPassword());
+
 		// 一件更新
 		int rowNumber = jdbc.update("UPDATE M_USER"
 			+" SET"
@@ -125,7 +135,7 @@ public class UserDaoJdbcImpl implements UserDao {
 			+" age = ?,"
 			+" marriage = ?"
 			+" WHERE user_id = ?"
-			, user.getPassword()
+			, password
 			, user.getUserName()
 			, user.getBirthday()
 			, user.getAge()

@@ -22,6 +22,7 @@ public class UserRowMapper implements RowMapper<User> {
 		user.setUserName(rs.getString("user_name"));
 		user.setBirthday(rs.getDate("birthday"));
 		user.setAge(rs.getInt("age"));
+		user.setGender(rs.getBoolean("gender"));
 		user.setMarriage(rs.getBoolean("marriage"));
 		user.setRole(rs.getString("role"));
 

@@ -40,6 +40,21 @@ public class SignupController{
 		return radio;
 	}
 
+	// ラジオボタンの実装
+	private Map<String,String>radioGender;
+
+	// ラジオボタンの初期化メソッド
+	private Map<String,String>initRadioGender() {
+
+		Map<String,String>radio = new LinkedHashMap<>();
+
+		// 性別をMapに格納
+		radio.put("男性","true");
+		radio.put("女性","false");
+
+		return radio;
+	}
+
 	// ユーザー登録画面のGET用コントローラー
 	@GetMapping("/signup")
 	public String getSignUp(@ModelAttribute SignupForm form, Model model) {
@@ -49,6 +64,12 @@ public class SignupController{
 
 		// ラジオボタン用のMapをModelに登録
 		model.addAttribute("radioMarriage", radioMarriage);
+
+		// ラジオボタンの初期化メソッド呼び出し
+		radioGender = initRadioGender();
+
+		// ラジオボタン用のMapをModelに登録
+		model.addAttribute("radioGender", radioGender);
 
 		// signup.htmlに画面遷移
 		return "login/signup";
@@ -81,6 +102,7 @@ public class SignupController{
 		user.setUserName(form.getUserName());// ユーザー名
 		user.setBirthday(form.getBirthday());// 誕生日
 		user.setAge(form.getAge());// 年齢
+		user.setGender(form.isGender());// 性別
 		user.setMarriage(form.isMarriage());// 結婚ステータス
 		user.setRole("ROLE_GENERAL");// ロール(一般)
 

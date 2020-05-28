@@ -90,6 +90,25 @@
 							</td>
 						</tr>
 						<tr>
+							<!-- 性別 -->
+							<th class="active">性別</th>
+							<td>
+								<div class="form-group">
+									<div th:each="item : ${radioGender}">
+										<input type="radio" name="radioGender"
+											th:value="${item.value}"
+											th:text="${item.key}"
+											th:field="*{gender}">
+										</input>
+									</div>
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('gender')}"
+										th:errors="*{gender}">
+										gender error
+									</span>
+								</div>
+							</td>
+						</tr>
 							<!-- 結婚 -->
 							<th class="active">結婚</th>
 							<td>

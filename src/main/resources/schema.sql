@@ -14,6 +14,7 @@ m_user(
 	user_name VARCHAR(50),
 	birthday DATE,
 	age INT,
+	gender BOOLEAN,
 	marriage BOOLEAN,
 	role VARCHAR(50)
 );

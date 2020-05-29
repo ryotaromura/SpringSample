@@ -45,5 +45,9 @@ public class SignupForm {
 
 	// falseのみ可能
 	@AssertFalse(groups = ValidGroup2.class, message = "{false_check}")
+	private boolean gender; // 性別
+
+	// falseのみ可能
+	@AssertFalse(groups = ValidGroup2.class, message = "{false_check}")
 	private boolean marriage; // 結婚ステータス
 }

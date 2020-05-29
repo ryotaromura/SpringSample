@@ -32,6 +32,7 @@ implements RowCallbackHandler {
 						+ "," + rs.getString("user_name")
 						+ "," + rs.getDate("birthday")
 						+ "," + rs.getInt("age")
+						+ "," + rs.getBoolean("gender")
 						+ "," + rs.getBoolean("marriage")
 						+ "," + rs.getString("role");
 

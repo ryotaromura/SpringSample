@@ -42,6 +42,22 @@ public class HomeController {
 		return radio;
 	}
 
+	// 性別のラジオボタン用変数
+	private Map<String,String>radioGender;
+
+	// ラジオボタンの初期化メソッド
+	private Map<String,String>initRadioGender() {
+
+		Map<String,String>radio = new LinkedHashMap<>();
+
+		// 性別をMapに格納
+		radio.put("男性", "true");
+		radio.put("女性", "false");
+
+		return radio;
+	}
+
+
 	// ホーム画面のGET用メソッド
 	@GetMapping("/home")
 	public String getHome(Model model) {
@@ -91,6 +107,12 @@ public class HomeController {
 		// ラジオボタン用のMapをModelに登録
 		model.addAttribute("radioMarriage",radioMarriage);
 
+		// 性別用ラジオボタンの初期化
+		radioGender = initRadioGender();
+
+		// ラジオボタン用のMapをModelに登録
+		model.addAttribute("radioGender",radioGender);
+
 		// ユーザーIDのチェック
 		if(userId!=null && userId.length()>0) {
 
@@ -102,6 +124,7 @@ public class HomeController {
 			form.setUserName(user.getUserName());// ユーザー名
 			form.setBirthday(user.getBirthday());// 誕生日
 			form.setAge(user.getAge());// 年齢
+			form.setGender(user.isGender());// 性別
 			form.setMarriage(user.isMarriage());// 結婚ステータス
 
 			// Modelに登録
@@ -127,6 +150,7 @@ public class HomeController {
 		user.setUserName(form.getUserName());
 		user.setBirthday(form.getBirthday());
 		user.setAge(form.getAge());
+		user.setGender(form.isGender());
 		user.setMarriage(form.isMarriage());
 
 		try {
@@ -211,6 +235,17 @@ public class HomeController {
 
 		// コンテンツ部分にユーザー詳細を表示するための文字列を登録
 		model.addAttribute("contents","login/admin::admin_contents");
+
+		// レイアウト用テンプレート
+		return "login/homeLayout";
+	}
+
+	// テスト画面のGET用メソッド
+	@GetMapping("/test")
+	public String getTest(Model model) {
+
+		// コンテンツ部分にユーザー詳細を表示するための文字列を登録
+		model.addAttribute("contents","login/test::test_contents");
 
 		// レイアウト用テンプレート
 		return "login/homeLayout";

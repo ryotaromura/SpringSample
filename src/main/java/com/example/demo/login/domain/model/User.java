@@ -12,6 +12,7 @@ public class User {
 	private String userName;// ユーザー名
 	private Date birthday;// 誕生日
 	private int age;// 年齢
+	private boolean gender;// 性別
 	private boolean marriage;// 結婚ステータス
 	private String role;// ロール
 }

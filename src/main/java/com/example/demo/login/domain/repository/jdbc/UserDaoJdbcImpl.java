@@ -48,6 +48,7 @@ public class UserDaoJdbcImpl implements UserDao {
 		+ "birthday,"
 		+ "age,"
 		+ "marriage,"
+		+ "gender,"
 		+ "role)"
 		+ "VALUES(?,?,?,?,?,?,?)"
 		,user.getUserId()
@@ -55,6 +56,7 @@ public class UserDaoJdbcImpl implements UserDao {
 		,user.getUserName()
 		,user.getBirthday()
 		,user.getAge()
+		,user.isGender()
 		,user.isMarriage()
 		,user.getRole());
 
@@ -80,6 +82,7 @@ public class UserDaoJdbcImpl implements UserDao {
 	user.setUserName((String)map.get("user_name"));// ユーザー名
 	user.setBirthday((Date)map.get("birthday"));// 誕生日
 	user.setAge((Integer)map.get("age"));// 年齢
+	user.setGender((Boolean)map.get("gender"));// 性別
 	user.setMarriage((Boolean)map.get("marriage"));// 結婚ステータス
 	user.setRole((String)map.get("role"));// ロール
 
@@ -109,6 +112,7 @@ public class UserDaoJdbcImpl implements UserDao {
 			user.setUserName((String)map.get("user_name"));// ユーザー名
 			user.setBirthday((Date)map.get("birthday"));// 誕生日
 			user.setAge((Integer)map.get("age"));// 年齢
+			user.setGender((Boolean)map.get("gender"));// 性別
 			user.setMarriage((Boolean)map.get("marriage"));// 結婚ステータス
 			user.setRole((String)map.get("role"));// ロール
 
@@ -139,6 +143,7 @@ public class UserDaoJdbcImpl implements UserDao {
 			, user.getUserName()
 			, user.getBirthday()
 			, user.getAge()
+			, user.isGender()
 			, user.isMarriage()
 			, user.getUserId());
 

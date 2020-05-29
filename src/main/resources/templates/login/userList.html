@@ -15,7 +15,8 @@
 			<th class="info col-sm-2">ユーザID</th>
 			<th class="info col-sm-2">ユーザ名</th>
 			<th class="info col-sm-2">誕生日</th>
-			<th class="info col-sm-2">年齢D</th>
+			<th class="info col-sm-2">年齢</th>
+			<th class="info col-sm-2">性別</th>
 			<th class="info col-sm-2">結婚</th>
 			<th class="info col-sm-2"></th>
 		</tr>
@@ -25,6 +26,7 @@
 			<!-- 日付型のフォーマット -->
 			<td th:text="${#dates.format(user.birthday,'YYYY/MM/dd')}"></td>
 			<td th:text="${user.age}"></td>
+			<td th:text="${user.gender}?'男性':'女性'"></td>
 			<td th:text="${user.marriage}?'既婚':'未婚'"></td>
 			<td>
 				<!-- 動的URL -->

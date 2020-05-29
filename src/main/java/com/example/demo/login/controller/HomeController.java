@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.login.domain.model.SignupForm;
+import com.example.demo.login.domain.model.Task;
 import com.example.demo.login.domain.model.User;
+import com.example.demo.login.domain.service.TaskService;
 import com.example.demo.login.domain.service.UserService;
 
 @Controller
@@ -26,6 +28,9 @@ public class HomeController {
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	TaskService taskService;
 
 	// 結婚ステータスのラジオボタン用変数
 	private Map<String,String>radioMarriage;
@@ -57,6 +62,21 @@ public class HomeController {
 		return radio;
 	}
 
+	// タスクステータスのプルダウン用変数
+	private Map<String,String>selectStatus;
+
+	// タスクステータスの初期化メソッド
+	private Map<String,String>initSelectStatus() {
+
+		Map<String,String>select = new LinkedHashMap<>();
+
+		// ステータスをMapに格納
+		select.put("未着手", "未着手");
+		select.put("作業中", "作業中");
+		select.put("完了", "完了");
+
+		return select;
+	}
 
 	// ホーム画面のGET用メソッド
 	@GetMapping("/home")
@@ -240,14 +260,25 @@ public class HomeController {
 		return "login/homeLayout";
 	}
 
-	// テスト画面のGET用メソッド
-	@GetMapping("/test")
-	public String getTest(Model model) {
+	// タスクリスト画面のGET用メソッド
+	@GetMapping("/taskList")
+	public String getTaskList(Model model) {
 
-		// コンテンツ部分にユーザー詳細を表示するための文字列を登録
-		model.addAttribute("contents","login/test::test_contents");
+		// コンテンツ部分にタスクリストを表示するための文字列を登録
+		model.addAttribute("contents","login/taskList::taskList_contents");
 
-		// レイアウト用テンプレート
+		// タスクステータスプルダウンの初期化
+		selectStatus = initSelectStatus();
+
+		// プルダウン用のMapをModelに登録
+		model.addAttribute("selectStatus",selectStatus);
+
+		// タスクリストの生成
+		List<Task>taskList = taskService.selectMany();
+
+		// Modelにタスクリストを登録
+		model.addAttribute("taskList",taskList);
+
 		return "login/homeLayout";
 	}
 }

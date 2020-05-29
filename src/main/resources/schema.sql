@@ -18,3 +18,13 @@ m_user(
 	marriage BOOLEAN,
 	role VARCHAR(50)
 );
+
+/* タスクリスト */
+CREATE TABLE IF NOT EXISTS
+tasks(
+	task_id VARCHAR(50) PRIMARY KEY,
+	task_name VARCHAR(50),
+	deadline DATE,
+	status VARCHAR(50),
+	person VARCHAR(50)
+);

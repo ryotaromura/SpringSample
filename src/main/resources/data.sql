@@ -27,3 +27,33 @@ VALUES('nakamura@xxx.co.jp',
 '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa',
 '中村翔子','1986-11-05',31,false,true,
 'ROLE_GENERAL');
+
+/* タスクリストのデータ */
+INSERT INTO tasks (task_id,
+task_name,deadline,
+status,person)
+VALUES('001',
+'設計',
+'2020-5-29',
+'完了',
+'山田太郎');
+
+/* タスクリストのデータ */
+INSERT INTO tasks (task_id,
+task_name,deadline,
+status,person)
+VALUES('002',
+'コーディング',
+'2020-7-2',
+'作業中',
+'田村達也');
+
+/* タスクリストのデータ */
+INSERT INTO tasks (task_id,
+task_name,deadline,
+status,person)
+VALUES('003',
+'テスト',
+'2020-8-05',
+'未着手',
+'中村翔子');
